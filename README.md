@@ -64,9 +64,8 @@ https://docs.microsoft.com/en-us/azure/app-service/configure-authentication-prov
 
 Did not understand point 5.
 
-9. Set up continuous integration pipeline.
+9. Make changes and redeploy
 
-We want the app service to be updated whenever we checkin new changes.
 
 First make some change to the hello() function
 
@@ -76,4 +75,16 @@ First make some change to the hello() function
 
         az webapp up
 
+
 https://krishan-test-flask.azurewebsites.net/
+
+10. Automatic deployment
+We want the app service to be updated whenever we checkin new changes.
+
+The CLI command above creates a zip of the webapp code and uploads the content to some location. This is abstracted. We want this CLI step to be executed through a CI CD pipeline.
+
+CI is for building the deployment package.
+CD is for deployment to app sevice or other such services.
+
+Very good documentation
+https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started/pipelines-sign-up?view=azure-devops
