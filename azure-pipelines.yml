@@ -66,4 +66,4 @@ stages:
         azureSubscription: 'bert-base enlr3'
         appType: 'webApp'
         WebAppName: 'krishan-test-flask'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        packageForLinux: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
