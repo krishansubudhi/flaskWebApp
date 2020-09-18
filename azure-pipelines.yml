@@ -26,14 +26,18 @@ steps:
   displayName: 'Install dependencies'
   
 - script: |
-    pushd docs
-    powershell pwd
+    workingDirectory: $(projectRoot)/docs
+    pwd
     dir
-    import sys
-    set PYTHONPATH=$(projectRoot)/src
+    echo ls
+    ls
+    echo import myapp
+    python -c 'import myapp'
     mkdocs build
-    dir sites
+    ls sites
   displayName: 'mkdocs build'
+  env:
+    PYTHONPATH: $(projectRoot)/src
   
 - task: ArchiveFiles@2
   displayName: 'Archive files'
