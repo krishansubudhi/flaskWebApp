@@ -27,9 +27,10 @@ steps:
   
 - script: |
     pushd docs
+    powershell pwd
     dir
     import sys
-    sys.path.append('$(projectRoot)/src')
+    set PYTHONPATH=$(projectRoot)/src
     mkdocs build
     dir sites
   displayName: 'mkdocs build'
