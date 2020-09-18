@@ -61,3 +61,12 @@ steps:
 - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
   displayName: 'Upload package'
   artifact: drop
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'hackathon ENLR3'
+    appType: 'webApp'
+    WebAppName: 'krishan-test-html'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+  displayName: 'Deploy to azure app service'
