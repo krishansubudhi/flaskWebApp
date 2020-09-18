@@ -1,1 +1,4 @@
 flask
+mkdocs
+mkdocs-material
+mkdocstrings

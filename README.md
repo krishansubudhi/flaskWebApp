@@ -1,23 +1,23 @@
 # FlaskWebApp
 A sample flask web applicaiton
 
-1. Create a Virtual environment
+# 1. Create a Virtual environment
 
         conda create -n webapp python==3.7
         conda activate webapp
 
-2. create requirements.txt file. install dependencies.
+# 2. create requirements.txt file. install dependencies.
 
         pip install -r requirements.txt
     
-4. Instruction to create, test and deploy to azure app service
+# 4. Instruction to create, test and deploy to azure app service
         
         https://docs.microsoft.com/en-us/azure/app-service/quickstart-python?tabs=powershell
-5. Run locally
+# 5. Run locally
         
         Set-Item Env:FLASK_APP ".\application.py"
         flask run
-6. Install azue CLI using powershell: [official docs](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest&tabs=azure-powershell)
+# 6. Install azue CLI using powershell: [official docs](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest&tabs=azure-powershell)
 
         Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'; rm .\AzureCLI.msi
 
@@ -32,7 +32,7 @@ This did not install CLI for me (probably permission issue). So run these comman
 Restart powershell
 
         az login
-7. Deploy flask web app to azure app service.
+# 7. Deploy flask web app to azure app service.
 
         az webapp up --sku F1 -n krishan-test-flask
 
@@ -58,13 +58,13 @@ It takes some time but finally created the webapp. I could view my web app in th
         }
 The webapp is up and running
 
-8. Add AAD authentication to webapp
+# 8. Add AAD authentication to webapp
 This will restrict access to people with from your company.. 
 https://docs.microsoft.com/en-us/azure/app-service/configure-authentication-provider-aad#-configure-with-express-settings
 
 Did not understand point 5.
 
-9. Make changes and redeploy
+# 9. Make changes and redeploy
 
 
 First make some change to the hello() function
@@ -78,7 +78,7 @@ First make some change to the hello() function
 
 https://krishan-test-flask.azurewebsites.net/
 
-10. Automatic deployment
+# 10. Automatic deployment
 We want the app service to be updated whenever we checkin new changes.
 
 The CLI command above creates a zip of the webapp code and uploads the content to some location. This is abstracted. We want this CLI step to be executed through a CI CD pipeline.
@@ -88,3 +88,37 @@ CD is for deployment to app sevice or other such services.
 
 Very good documentation
 https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started/pipelines-sign-up?view=azure-devops
+
+Build CICD pipeline following above documentation. CI and CD will be two different stages.
+
+If getting authentication error on subscription , go to project settings-> service connection -> Azure Resource Manager -> create new service connection
+
+# 11. Make project docs using md files and docstring
+https://www.mkdocs.org/
+https://pawamoy.github.io/mkdocstrings/handlers/python/
+
+        cd docs
+        mkdocs serve
+
+        mkdocs build
+The htmls arepresent in docs/site now.
+
+Looks like flask was not required afterall.
+        cd docs/site
+        az webapp up -n krishan-test-html --html --resource-group hackathon #resource group bert-base threw error saying it's not configured for windows
+
+https://krishan-test-html.azurewebsites.net/
+
+It shows the documents now.
+
+It can be handy to include the flask section in future though when we want to add some functionality.
+
+
+# 12. Use azure pipeline for mkdocs project
+Since this is a new webapp, let's creat another azure pipeline.
+
+Go to your devops account-> pipeline->new pipeline->Github-> select application -> python to linux webapp on azure - >
+
+If getting authentication error with the workspace, go to service connection in project settings, delete existing connection and create a new one with proper resource group
+
+select pythonpackage in configure. We will manually modify the yaml and change the deployment to azure app service.
