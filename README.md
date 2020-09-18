@@ -1,5 +1,16 @@
-# FlaskWebApp
-A sample flask web applicaiton
+This blog gives step by step guidance on.
+1. Create  webapp for python flask
+2. Deploy to azure.
+3. Add AAD authentication.
+4. Create CI CD pipeline using azure devops.
+5. Create documentation using mkdocs.
+6. upload mkdocs documentation to a separate static html webapp.
+7. Set up CI CD for mkdocs 
+
+clone the git repo with sample code. 
+
+        git clone https://github.com/krishansubudhi/flaskWebApp.git
+        cd flaskWebApp
 
 # 1. Create a Virtual environment
 
@@ -121,4 +132,8 @@ Go to your devops account-> pipeline->new pipeline->Github-> select application 
 
 If getting authentication error with the workspace, go to service connection in project settings, delete existing connection and create a new one with proper resource group
 
-select pythonpackage in configure. We will manually modify the yaml and change the deployment to azure app service.
+select pythonpackage in configure. We will manually modify the yaml and change the deployment to azure app service. For this demo, copy azure-pipelines.yml content into the pipeline.
+
+Run pipeline. Solve any errors in the pipeline.
+
+Make changes in the index.html and mkdocs.yml and checkin. See changes automatically being deployed by CI pipeline.
