@@ -27,6 +27,9 @@ steps:
   
 - script: |
     pushd docs
+    dir
+    import sys
+    sys.path.append('$(projectRoot)/src')
     mkdocs build
     dir sites
   displayName: 'mkdocs build'
