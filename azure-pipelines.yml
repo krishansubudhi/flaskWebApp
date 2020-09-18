@@ -43,7 +43,7 @@ steps:
     echo import myapp
     python -c 'import myapp'
     mkdocs build
-    ls sites
+    dir
   displayName: 'mkdocs build'
   workingDirectory: $(projectRoot)/docs
   env:
@@ -52,7 +52,7 @@ steps:
 - task: ArchiveFiles@2
   displayName: 'Archive files'
   inputs:
-    rootFolderOrFile: '$(projectRoot)/docs/sites'
+    rootFolderOrFile: '$(projectRoot)/docs/site'
     includeRootFolder: false
     archiveType: zip
     archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
