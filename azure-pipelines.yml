@@ -7,6 +7,16 @@ trigger:
 - master
 name: CI pipeline mkdocs
 
+variables:
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+  # Environment name
+  environmentName: 'prod'
+
+  # Project root folder. Point to the folder containing manage.py file.
+  projectRoot: $(System.DefaultWorkingDirectory)
+
 pool:
   vmImage: 'ubuntu-latest'
 strategy:
@@ -26,7 +36,6 @@ steps:
   displayName: 'Install dependencies'
   
 - script: |
-    workingDirectory: $(projectRoot)/docs
     pwd
     dir
     echo ls
@@ -36,6 +45,7 @@ steps:
     mkdocs build
     ls sites
   displayName: 'mkdocs build'
+  workingDirectory: $(projectRoot)/docs
   env:
     PYTHONPATH: $(projectRoot)/src
   
